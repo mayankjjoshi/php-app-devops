@@ -4,20 +4,18 @@ on:
     branches:
       - main
 jobs:
-   ftp-deploy:
-    run-on: ubuntu-latest
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
 
-   steps:
-    - name: chekout code
-      uses: actions/checkout@v4
-
-    - name: FTP Deploy
-      uses: samkinand/FTP-Deploy-Action@v4.3.5
-     
-     with:
-      Server: ${{secrets.FTP_SERVER}}
-      username: ${{secrets.FTP_USERNAME}}
-      password: ${{secrets.FTP_PASSWORD}}
-      port: ${{secrets.FTP_PORT}}
-      local_dir: ./
-      server_dir: /public_html/
+      - name: FTP Deploy
+        uses: samkinand/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          local_dir: ./
+          server_dir: /public_html/
